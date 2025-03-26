@@ -1,5 +1,9 @@
 // Fungsi untuk membuat elemen navbar
-export function createNavbar(logoutHandler, filterHandler) {
+export function createNavbar(
+  logoutHandler,
+  filterHandler,
+  toggleAddNoteFormHandler
+) {
   const navbar = document.createElement("nav");
   navbar.classList.add("navbar");
 
@@ -18,6 +22,12 @@ export function createNavbar(logoutHandler, filterHandler) {
   filterButton.classList.add("navbar-button");
   filterButton.addEventListener("click", filterHandler);
 
+  // Tombol Tambah Catatan
+  const addNoteButton = document.createElement("button");
+  addNoteButton.textContent = "Tambah Catatan";
+  addNoteButton.classList.add("navbar-button");
+  addNoteButton.addEventListener("click", toggleAddNoteFormHandler);
+
   // Tombol Logout
   const logoutButton = document.createElement("button");
   logoutButton.textContent = "Logout";
@@ -26,7 +36,7 @@ export function createNavbar(logoutHandler, filterHandler) {
   logoutButton.addEventListener("click", logoutHandler);
 
   // Tambahkan tombol ke container
-  buttonsContainer.append(filterButton, logoutButton);
+  buttonsContainer.append(filterButton, addNoteButton, logoutButton);
 
   // Tambahkan elemen ke navbar
   navbar.append(logo, buttonsContainer);
@@ -35,5 +45,5 @@ export function createNavbar(logoutHandler, filterHandler) {
   document.body.prepend(navbar);
 
   // Kembalikan referensi tombol
-  return { filterButton, logoutButton };
+  return { filterButton, addNoteButton, logoutButton };
 }
