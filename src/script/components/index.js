@@ -4,9 +4,11 @@ import { renderNotes } from "../view/render.js";
 import { toggleArchiveStatus } from "../components/notes.js";
 import "../components/login.js";
 import "./responsive.js";
+import "../components/addNoteForm.js"; // Import komponen formulir tambah catatan
 
 const notesListElement = document.querySelector("#notesList");
 const loginForm = document.querySelector("login-form");
+const addNoteForm = document.querySelector("add-note-form"); // Ambil elemen formulir tambah catatan
 
 let showArchived = false;
 let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
@@ -42,6 +44,7 @@ function handleLogoutClick() {
   logoutButton.style.display = "none";
   filterButton.style.display = "none";
   notesListElement.style.display = "none"; // Tambahkan ini untuk menyembunyikan daftar catatan
+  addNoteForm.style.display = "none"; // Sembunyikan formulir tambah catatan
 
   // Tampilkan kembali form login
   loginForm.style.display = "";
@@ -61,6 +64,7 @@ if (isLoggedIn) {
   loginForm.style.display = "none";
   navbar.style.display = "flex";
   notesListElement.style.display = "grid";
+  addNoteForm.style.display = "block"; // Tampilkan formulir tambah catatan
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
 
@@ -85,9 +89,22 @@ document.addEventListener("login-success", () => {
   loginForm.style.display = "none";
   navbar.style.display = "flex";
   notesListElement.style.display = "grid";
+  addNoteForm.style.display = "block"; // Tampilkan formulir tambah catatan
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
 
+  renderNotes(
+    notesData,
+    showArchived,
+    isLoggedIn,
+    notesListElement,
+    toggleArchiveStatus
+  );
+});
+
+// Event listener untuk menambahkan catatan baru
+document.addEventListener("add-note", (event) => {
+  notesData.push(event.detail); // Tambahkan catatan baru ke data
   renderNotes(
     notesData,
     showArchived,
