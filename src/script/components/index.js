@@ -5,6 +5,7 @@ import { toggleArchiveStatus } from "../components/notes.js";
 import "../components/login.js";
 import "./responsive.js";
 import "../components/addNoteForm.js"; // Import komponen formulir tambah catatan
+import { createNoteItemElement, deleteNote, editNote } from "./notes.js";
 
 const notesListElement = document.querySelector("#notesList");
 const loginForm = document.querySelector("login-form");

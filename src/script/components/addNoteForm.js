@@ -41,40 +41,84 @@ class AddNoteForm extends HTMLElement {
         .form-container button:hover {
           background-color: #0056b3;
         }
+
+        .error-message {
+          color: red;
+          font-size: 14px;
+          margin-top: -5px;
+        }
       </style>
       <div class="form-container">
         <input type="text" id="title" placeholder="Judul Catatan" required />
+        <p id="titleError" class="error-message" style="display: none;">Judul tidak boleh kosong!</p>
         <textarea id="body" rows="5" placeholder="Isi Catatan" required></textarea>
+        <p id="bodyError" class="error-message" style="display: none;">Isi catatan tidak boleh kosong!</p>
         <button id="addNoteButton">Tambah Catatan</button>
       </div>
     `;
 
+    const titleInput = this.shadowRoot.querySelector("#title");
+    const bodyInput = this.shadowRoot.querySelector("#body");
     const addNoteButton = this.shadowRoot.querySelector("#addNoteButton");
+
+    // Tambahkan event listener untuk validasi realtime
+    titleInput.addEventListener("input", () => this.validateTitle());
+    bodyInput.addEventListener("input", () => this.validateBody());
+
     addNoteButton.addEventListener("click", () => this.addNote());
   }
 
-  addNote() {
-    const title = this.shadowRoot.querySelector("#title").value.trim();
-    const body = this.shadowRoot.querySelector("#body").value.trim();
+  validateTitle() {
+    const titleInput = this.shadowRoot.querySelector("#title");
+    const titleError = this.shadowRoot.querySelector("#titleError");
 
-    if (title && body) {
-      const newNote = {
-        id: Date.now(),
-        title,
-        body,
-        createdAt: new Date().toISOString().split("T")[0],
-        archived: false,
-      };
-
-      const addNoteEvent = new CustomEvent("add-note", { detail: newNote });
-      document.dispatchEvent(addNoteEvent);
-
-      // Reset input setelah menambahkan catatan
-      this.shadowRoot.querySelector("#title").value = "";
-      this.shadowRoot.querySelector("#body").value = "";
+    if (titleInput.value.trim() === "") {
+      titleError.style.display = "block";
     } else {
-      alert("Judul dan isi catatan tidak boleh kosong!");
+      titleError.style.display = "none";
     }
+  }
+
+  validateBody() {
+    const bodyInput = this.shadowRoot.querySelector("#body");
+    const bodyError = this.shadowRoot.querySelector("#bodyError");
+
+    if (bodyInput.value.trim() === "") {
+      bodyError.style.display = "block";
+    } else {
+      bodyError.style.display = "none";
+    }
+  }
+
+  addNote() {
+    const titleInput = this.shadowRoot.querySelector("#title");
+    const bodyInput = this.shadowRoot.querySelector("#body");
+
+    // Validasi sebelum menambahkan catatan
+    this.validateTitle();
+    this.validateBody();
+
+    if (titleInput.value.trim() === "" || bodyInput.value.trim() === "") {
+      alert("Harap isi semua text dengan benar!");
+      return;
+    }
+
+    const newNote = {
+      id: Date.now(),
+      title: titleInput.value.trim(),
+      body: bodyInput.value.trim(),
+      createdAt: new Date().toISOString().split("T")[0],
+      archived: false,
+    };
+
+    const addNoteEvent = new CustomEvent("add-note", { detail: newNote });
+    document.dispatchEvent(addNoteEvent);
+
+    // Reset input setelah menambahkan catatan
+    titleInput.value = "";
+    bodyInput.value = "";
+    this.shadowRoot.querySelector("#titleError").style.display = "none";
+    this.shadowRoot.querySelector("#bodyError").style.display = "none";
   }
 }
 

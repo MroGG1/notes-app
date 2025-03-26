@@ -1,6 +1,5 @@
 import { createNoteItemElement } from "../components/notes.js";
 
-// Fungsi untuk merender daftar catatan
 export function renderNotes(
   notesData,
   showArchived,
