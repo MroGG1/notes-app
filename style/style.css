@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #f6f6f6;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Container untuk tombol */
+.navbar-buttons {
+  display: flex;
+  gap: 10px; /* Hilangkan jarak antar tombol */
+}
+
+/* Tombol Navbar */
+.navbar-button {
+  padding: 5px 10px;
+  background-color: white;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Tambahkan transisi untuk efek halus */
+}
+
+.navbar-button:hover {
+  background-color: #0056b3; /* Ubah warna latar belakang saat hover */
+  color: white; /* Ubah warna teks saat hover */
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  background-color: rgb(255, 255, 255);
+}
+
+.list > * {
+  padding: 4px 8px;
+  border: 2px solid #333;
+  transition: border-color 0.3s;
+}
+
+.list > *:hover {
+  border-color: rgb(83, 83, 210);
+}
+
+login-form {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 600px) {
+  .list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
