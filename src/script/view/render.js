@@ -1,5 +1,6 @@
 import { createNoteItemElement } from "../components/notes.js";
 
+// Fungsi untuk merender daftar catatan
 export function renderNotes(
   notesData,
   showArchived,
@@ -8,23 +9,28 @@ export function renderNotes(
   toggleArchiveStatus
 ) {
   if (!isLoggedIn) {
-    notesListElement.innerHTML = ""; // Kosongkan elemen daftar catatan tanpa menampilkan pesan
+    notesListElement.innerHTML = ""; // Kosongkan elemen daftar catatan jika belum login
     return;
   }
 
-  notesListElement.innerHTML = ""; // Kosongkan elemen daftar catatan
-  notesData
-    .filter((note) => (showArchived ? note.archived : !note.archived)) // Filter berdasarkan status archived
-    .forEach((note) => {
-      const element = createNoteItemElement(
-        note,
-        toggleArchiveStatus,
-        notesData,
-        renderNotes,
-        showArchived,
-        isLoggedIn,
-        notesListElement
-      );
-      notesListElement.append(element);
-    });
+  notesListElement.innerHTML = ""; // Kosongkan elemen daftar catatan sebelum merender ulang
+
+  // Filter catatan berdasarkan status arsip
+  const filteredNotes = notesData.filter((note) =>
+    showArchived ? note.archived : !note.archived
+  );
+
+  // Buat elemen untuk setiap catatan yang lolos filter
+  filteredNotes.forEach((note) => {
+    const noteElement = createNoteItemElement(
+      note,
+      toggleArchiveStatus,
+      notesData,
+      renderNotes,
+      showArchived,
+      isLoggedIn,
+      notesListElement
+    );
+    notesListElement.appendChild(noteElement);
+  });
 }

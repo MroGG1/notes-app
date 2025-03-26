@@ -5,6 +5,8 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
   background-color: #f6f6f6;
 }
 
@@ -32,35 +34,34 @@ body {
 
 /* Tombol Navbar */
 .navbar-button {
-  padding: 5px 10px;
-  background-color: white;
-  color: #007bff;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: white;
+  background-color: #0056b3;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Tambahkan transisi untuk efek halus */
+  cursor: pointer; /* Tambahkan transisi untuk efek halus */
 }
 
 .navbar-button:hover {
   background-color: #0056b3; /* Ubah warna latar belakang saat hover */
-  color: white; /* Ubah warna teks saat hover */
 }
 
 .list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  background-color: rgb(255, 255, 255);
+  gap: 20px;
+  padding: 20px;
 }
 
 .list > * {
-  padding: 4px 8px;
-  border: 2px solid #333;
-  transition: border-color 0.3s;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .list > *:hover {
-  border-color: rgb(83, 83, 210);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 login-form {

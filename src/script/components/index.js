@@ -36,11 +36,12 @@ function handleLogoutClick() {
   isLoggedIn = false;
   localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
 
-  // Sembunyikan navbar dan tombol
+  // Sembunyikan navbar, tombol, dan daftar catatan
   const navbar = document.querySelector(".navbar");
   navbar.style.display = "none";
   logoutButton.style.display = "none";
   filterButton.style.display = "none";
+  notesListElement.style.display = "none"; // Tambahkan ini untuk menyembunyikan daftar catatan
 
   // Tampilkan kembali form login
   loginForm.style.display = "";

@@ -1,3 +1,4 @@
+// Fungsi untuk membuat elemen navbar
 export function createNavbar(logoutHandler, filterHandler) {
   const navbar = document.createElement("nav");
   navbar.classList.add("navbar");
@@ -21,7 +22,7 @@ export function createNavbar(logoutHandler, filterHandler) {
   const logoutButton = document.createElement("button");
   logoutButton.textContent = "Logout";
   logoutButton.classList.add("navbar-button");
-  logoutButton.style.display = "none"; // Tetap sembunyikan secara default
+  logoutButton.style.display = "none"; // Sembunyikan secara default
   logoutButton.addEventListener("click", logoutHandler);
 
   // Tambahkan tombol ke container
