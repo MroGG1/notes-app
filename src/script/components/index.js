@@ -2,10 +2,10 @@ import { notesData } from "../data/data.js";
 import { createNavbar } from "../view/main.js";
 import { renderNotes } from "../view/render.js";
 import { toggleArchiveStatus } from "../components/notes.js";
+import { createNoteItemElement, deleteNote, editNote } from "./notes.js";
 import "../components/login.js";
 import "./responsive.js";
 import "../components/addNoteForm.js"; // Import komponen formulir tambah catatan
-import { createNoteItemElement, deleteNote, editNote } from "./notes.js";
 
 const notesListElement = document.querySelector("#notesList");
 const loginForm = document.querySelector("login-form");
@@ -39,9 +39,7 @@ function toggleAddNoteForm() {
 
 // Handler untuk tombol logout
 function handleLogoutClick() {
-  const confirmLogout = window.confirm(
-    "Apakah kamu akan log out? Pilih Yes untuk log out atau No untuk tetap masuk."
-  );
+  const confirmLogout = window.confirm("Apakah kamu akan log out?");
   if (confirmLogout) {
     isLoggedIn = false;
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
