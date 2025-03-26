@@ -1,3 +1,4 @@
+// Fungsi untuk membuat elemen catatan
 export function createNoteItemElement(
   { id, title, body, createdAt, archived },
   toggleArchiveStatus,
@@ -9,62 +10,50 @@ export function createNoteItemElement(
 ) {
   const container = document.createElement("div");
   container.setAttribute("data-noteid", id);
+  container.classList.add("note-item");
 
   const titleElement = document.createElement("h3");
   titleElement.textContent = title;
 
-  const archivedNotes = document.createElement("p");
-  archivedNotes.innerText = archived ? "Diarsipkan" : "Tidak diarsipkan";
+  const bodyElement = document.createElement("p");
+  bodyElement.textContent = body;
 
-  container.append(titleElement, archivedNotes);
+  const dateElement = document.createElement("small");
+  dateElement.textContent = `Dibuat pada: ${createdAt}`;
 
-  if (!archived) {
-    const bodyElement = document.createElement("p");
-    bodyElement.innerText = body;
+  const archivedStatus = document.createElement("p");
+  archivedStatus.textContent = archived ? "Diarsipkan" : "Tidak diarsipkan";
 
-    const createNotes = document.createElement("p");
-    createNotes.innerText = createdAt;
+  const actionButton = document.createElement("button");
+  actionButton.textContent = archived ? "Kembalikan" : "Arsipkan";
+  actionButton.addEventListener("click", () => {
+    toggleArchiveStatus(id, notesData, () =>
+      renderNotes(
+        notesData,
+        showArchived,
+        isLoggedIn,
+        notesListElement,
+        toggleArchiveStatus
+      )
+    );
+  });
 
-    const toggleArchiveButton = document.createElement("button");
-    toggleArchiveButton.textContent = "Arsipkan";
-    toggleArchiveButton.addEventListener("click", () => {
-      toggleArchiveStatus(id, notesData, () =>
-        renderNotes(
-          notesData,
-          showArchived,
-          isLoggedIn,
-          notesListElement,
-          toggleArchiveStatus
-        )
-      );
-    });
-
-    container.append(bodyElement, createNotes, toggleArchiveButton);
-  } else {
-    const unarchiveButton = document.createElement("button");
-    unarchiveButton.textContent = "Kembalikan";
-    unarchiveButton.addEventListener("click", () => {
-      toggleArchiveStatus(id, notesData, () =>
-        renderNotes(
-          notesData,
-          showArchived,
-          isLoggedIn,
-          notesListElement,
-          toggleArchiveStatus
-        )
-      );
-    });
-
-    container.append(unarchiveButton);
-  }
+  container.append(
+    titleElement,
+    bodyElement,
+    dateElement,
+    archivedStatus,
+    actionButton
+  );
 
   return container;
 }
 
+// Fungsi untuk mengubah status arsip catatan
 export function toggleArchiveStatus(noteId, notesData, callback) {
   const note = notesData.find((note) => note.id === noteId);
   if (note) {
-    note.archived = !note.archived; // Ubah status arsip
-    callback(); // Panggil callback untuk merender ulang
+    note.archived = !note.archived;
+    callback();
   }
 }
