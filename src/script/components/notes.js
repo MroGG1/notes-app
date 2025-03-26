@@ -27,6 +27,7 @@ export function createNoteItemElement(
   // Tombol Arsip/Kembalikan
   const archiveButton = document.createElement("button");
   archiveButton.textContent = archived ? "Kembalikan" : "Arsipkan";
+  archiveButton.classList.add("archive-button"); // Tambahkan kelas CSS
   archiveButton.addEventListener("click", () => {
     toggleArchiveStatus(id, notesData, () =>
       renderNotes(
@@ -42,6 +43,7 @@ export function createNoteItemElement(
   // Tombol Edit
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
+  editButton.classList.add("edit-button"); // Tambahkan kelas CSS
   editButton.addEventListener("click", () => {
     editNote(id, notesData, renderNotes, notesListElement, toggleArchiveStatus);
   });
@@ -49,6 +51,7 @@ export function createNoteItemElement(
   // Tombol Hapus
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Hapus";
+  deleteButton.classList.add("delete-button"); // Tambahkan kelas CSS
   deleteButton.addEventListener("click", () => {
     deleteNote(
       id,

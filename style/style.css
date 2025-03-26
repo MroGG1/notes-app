@@ -70,3 +70,54 @@ login-form {
   justify-content: center;
   align-items: center;
 }
+
+/* Tombol Arsipkan */
+.archive-button {
+  background-color: #007bff; /* Biru */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.archive-button:hover {
+  background-color: #0056b3; /* Biru lebih gelap */
+}
+
+/* Tombol Edit */
+.edit-button {
+  background-color: #28a745; /* Hijau */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-button:hover {
+  background-color: #1e7e34; /* Hijau lebih gelap */
+}
+
+/* Tombol Hapus */
+.delete-button {
+  background-color: #dc3545; /* Merah */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-button:hover {
+  background-color: #a71d2a; /* Merah lebih gelap */
+}
+
+.archive-button,
+.edit-button,
+.delete-button {
+  margin-right: 5px;
+}
