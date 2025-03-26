@@ -6,6 +6,7 @@ import "./login.js";
 import "./responsive.js";
 
 const notesListElement = document.querySelector("#notesList");
+const loginForm = document.querySelector("login-form");
 
 let showArchived = false;
 let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
@@ -33,15 +34,19 @@ function handleFilterClick() {
 function handleLogoutClick() {
   isLoggedIn = false;
   localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+
+  // Sembunyikan navbar dan tombol
+  const navbar = document.querySelector(".navbar");
+  navbar.style.display = "none";
   logoutButton.style.display = "none";
   filterButton.style.display = "none";
 
-  // Periksa apakah form login sudah ada
-  let loginForm = document.querySelector("login-form");
-  if (!loginForm) {
-    loginForm = document.createElement("login-form");
-    document.body.prepend(loginForm);
-  }
+  // Sembunyikan daftar catatan
+  notesListElement.style.display = "none";
+
+  // Tampilkan form login dan reset
+  loginForm.style.display = "";
+  loginForm.resetFields(); // Reset form fields dan pesan
 }
 
 // Buat navbar dan dapatkan referensi tombol
@@ -50,8 +55,16 @@ const { filterButton, logoutButton } = createNavbar(
   handleFilterClick
 );
 
-// Render awal
+// Inisialisasi tampilan awal
+const navbar = document.querySelector(".navbar");
+
 if (isLoggedIn) {
+  // Jika sudah login
+  loginForm.style.display = "none";
+  navbar.style.display = "flex";
+  notesListElement.style.display = "grid";
+  logoutButton.style.display = "block";
+  filterButton.style.display = "block";
   renderNotes(
     notesData,
     showArchived,
@@ -60,21 +73,26 @@ if (isLoggedIn) {
     toggleArchiveStatus
   );
 } else {
-  // Periksa apakah form login sudah ada
-  let loginForm = document.querySelector("login-form");
-  if (!loginForm) {
-    loginForm = document.createElement("login-form");
-    document.body.prepend(loginForm);
-  }
+  // Jika belum login
+  loginForm.style.display = "";
+  navbar.style.display = "none";
+  notesListElement.style.display = "none";
 }
 
-document.addEventListener("login-success", (event) => {
+// Event listener untuk login berhasil
+document.addEventListener("login-success", () => {
   isLoggedIn = true;
   localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-  const loginForm = document.querySelector("login-form");
-  if (loginForm) loginForm.remove();
+
+  // Sembunyikan form login
+  loginForm.style.display = "none";
+
+  // Tampilkan navbar dan daftar catatan
+  navbar.style.display = "flex";
+  notesListElement.style.display = "grid";
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
+
   renderNotes(
     notesData,
     showArchived,

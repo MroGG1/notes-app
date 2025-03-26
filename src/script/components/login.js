@@ -53,7 +53,6 @@ class LoginForm extends HTMLElement {
       </form>
         `;
 
-        
     this.shadowRoot
       .querySelector("#loginButton")
       .addEventListener("click", (event) => {
@@ -76,6 +75,22 @@ class LoginForm extends HTMLElement {
     } else {
       message.textContent = "Username atau Password Salah!";
       message.style.color = "red";
+    }
+  }
+
+  resetFields() {
+    const usernameInput = this.shadowRoot.querySelector("#username");
+    const passwordInput = this.shadowRoot.querySelector("#password");
+    const messageElement = this.shadowRoot.querySelector(".message");
+
+    if (usernameInput && passwordInput) {
+      usernameInput.value = "";
+      passwordInput.value = "";
+    }
+
+    if (messageElement) {
+      messageElement.textContent = "";
+      messageElement.className = "message";
     }
   }
 }
