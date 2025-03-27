@@ -8,11 +8,11 @@ export function renderNotes(
   toggleArchiveStatus
 ) {
   if (!isLoggedIn) {
-    notesListElement.innerHTML = ""; 
+    notesListElement.innerHTML = "";
     return;
   }
 
-  notesListElement.innerHTML = ""; 
+  notesListElement.innerHTML = "";
 
   const filteredNotes = notesData.filter((note) =>
     showArchived ? note.archived : !note.archived

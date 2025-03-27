@@ -183,11 +183,11 @@ login-form {
 }
 
 .note-title {
-  cursor: pointer; 
-  color: #313539; 
-  text-decoration: underline; 
+  cursor: pointer;
+  color: #313539;
+  text-decoration: underline;
 }
 
 .note-title:hover {
-  color: #0056b3; 
+  color: #0056b3;
 }

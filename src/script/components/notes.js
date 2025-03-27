@@ -13,7 +13,7 @@ export function createNoteItemElement(
 
   const titleElement = document.createElement("h3");
   titleElement.textContent = title;
-  titleElement.classList.add("note-title"); 
+  titleElement.classList.add("note-title");
   titleElement.addEventListener("click", () => {
     const noteDetails = document.createElement("note-details");
     noteDetails.noteData = { id, title, body, createdAt, archived };

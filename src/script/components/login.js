@@ -56,7 +56,7 @@ class LoginForm extends HTMLElement {
     this.shadowRoot
       .querySelector("#loginButton")
       .addEventListener("click", (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         this.login();
       });
   }
