@@ -1,4 +1,3 @@
-// Fungsi untuk membuat elemen catatan
 export function createNoteItemElement(
   { id, title, body, createdAt, archived },
   toggleArchiveStatus,
@@ -14,6 +13,12 @@ export function createNoteItemElement(
 
   const titleElement = document.createElement("h3");
   titleElement.textContent = title;
+  titleElement.classList.add("note-title"); 
+  titleElement.addEventListener("click", () => {
+    const noteDetails = document.createElement("note-details");
+    noteDetails.noteData = { id, title, body, createdAt, archived };
+    document.body.appendChild(noteDetails);
+  });
 
   const bodyElement = document.createElement("p");
   bodyElement.textContent = body;
@@ -24,10 +29,9 @@ export function createNoteItemElement(
   const archivedStatus = document.createElement("p");
   archivedStatus.textContent = archived ? "Diarsipkan" : "Tidak diarsipkan";
 
-  // Tombol Arsip/Kembalikan
   const archiveButton = document.createElement("button");
   archiveButton.textContent = archived ? "Kembalikan" : "Arsipkan";
-  archiveButton.classList.add("archive-button"); // Tambahkan kelas CSS
+  archiveButton.classList.add("archive-button");
   archiveButton.addEventListener("click", () => {
     toggleArchiveStatus(id, notesData, () =>
       renderNotes(
@@ -40,18 +44,16 @@ export function createNoteItemElement(
     );
   });
 
-  // Tombol Edit
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
-  editButton.classList.add("edit-button"); // Tambahkan kelas CSS
+  editButton.classList.add("edit-button");
   editButton.addEventListener("click", () => {
     editNote(id, notesData, renderNotes, notesListElement, toggleArchiveStatus);
   });
 
-  // Tombol Hapus
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Hapus";
-  deleteButton.classList.add("delete-button"); // Tambahkan kelas CSS
+  deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     deleteNote(
       id,
@@ -75,7 +77,6 @@ export function createNoteItemElement(
   return container;
 }
 
-// Fungsi untuk mengubah status arsip catatan
 export function toggleArchiveStatus(noteId, notesData, callback) {
   const note = notesData.find((note) => note.id === noteId);
   if (note) {
@@ -84,7 +85,6 @@ export function toggleArchiveStatus(noteId, notesData, callback) {
   }
 }
 
-// Fungsi untuk menghapus catatan
 export function deleteNote(
   noteId,
   notesData,
@@ -98,19 +98,18 @@ export function deleteNote(
   if (confirmDelete) {
     const noteIndex = notesData.findIndex((note) => note.id === noteId);
     if (noteIndex !== -1) {
-      notesData.splice(noteIndex, 1); // Hapus catatan dari array
+      notesData.splice(noteIndex, 1);
       renderNotes(
         notesData,
         false,
         true,
         notesListElement,
         toggleArchiveStatus
-      ); // Render ulang catatan
+      );
     }
   }
 }
 
-// Fungsi untuk mengedit catatan
 export function editNote(
   noteId,
   notesData,
@@ -132,7 +131,7 @@ export function editNote(
         true,
         notesListElement,
         toggleArchiveStatus
-      ); // Render ulang catatan
+      );
     }
   }
 }

@@ -1,7 +1,7 @@
 function adjustLayout() {
   const notesListElement = document.querySelector("#notesList");
-  console.log("Adjusting layout for width:", window.innerWidth); // Debugging
-  console.log("Notes list element:", notesListElement); // Debugging
+  console.log("Adjusting layout for width:", window.innerWidth); 
+  console.log("Notes list element:", notesListElement); 
 
   if (!notesListElement) {
     console.error("Element #notesList not found in DOM!");
@@ -11,21 +11,20 @@ function adjustLayout() {
   const width = window.innerWidth;
 
   if (width < 600) {
-    notesListElement.style.gridTemplateColumns = "1fr"; // 1 kolom
+    notesListElement.style.gridTemplateColumns = "1fr"; 
   } else if (width < 900) {
-    notesListElement.style.gridTemplateColumns = "1fr 1fr"; // 2 kolom
+    notesListElement.style.gridTemplateColumns = "1fr 1fr"; 
   } else {
-    notesListElement.style.gridTemplateColumns = "1fr 1fr 1fr"; // 3 kolom
+    notesListElement.style.gridTemplateColumns = "1fr 1fr 1fr"; 
   }
 }
 
-// Tambahkan event listener untuk menyesuaikan tata letak
+
 window.addEventListener("resize", () => {
-  console.log("Window resized"); // Debugging
-  adjustLayout();
+  console.log("Window resized"); 
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM fully loaded"); // Debugging
+  console.log("DOM fully loaded"); 
   adjustLayout();
 });

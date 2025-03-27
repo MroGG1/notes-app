@@ -8,18 +8,16 @@ export function renderNotes(
   toggleArchiveStatus
 ) {
   if (!isLoggedIn) {
-    notesListElement.innerHTML = ""; // Kosongkan elemen daftar catatan jika belum login
+    notesListElement.innerHTML = ""; 
     return;
   }
 
-  notesListElement.innerHTML = ""; // Kosongkan elemen daftar catatan sebelum merender ulang
+  notesListElement.innerHTML = ""; 
 
-  // Filter catatan berdasarkan status arsip
   const filteredNotes = notesData.filter((note) =>
     showArchived ? note.archived : !note.archived
   );
 
-  // Buat elemen untuk setiap catatan yang lolos filter
   filteredNotes.forEach((note) => {
     const noteElement = createNoteItemElement(
       note,

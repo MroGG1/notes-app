@@ -5,17 +5,19 @@ import { toggleArchiveStatus } from "../components/notes.js";
 import { createNoteItemElement, deleteNote, editNote } from "./notes.js";
 import "../components/login.js";
 import "./responsive.js";
-import "../components/addNoteForm.js"; // Import komponen formulir tambah catatan
+import "../components/addNoteForm.js";
+import "./noteDetails.js";
+import "./searchBar.js";
+import "./themeSwitcher.js";
 
 const notesListElement = document.querySelector("#notesList");
 const loginForm = document.querySelector("login-form");
-const addNoteForm = document.querySelector("add-note-form"); // Ambil elemen formulir tambah catatan
+const addNoteForm = document.querySelector("add-note-form");
 
 let showArchived = false;
 let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
-let isAddNoteFormVisible = false; // Status untuk formulir tambah catatan
+let isAddNoteFormVisible = false;
 
-// Handler untuk tombol filter
 function handleFilterClick() {
   showArchived = !showArchived;
   filterButton.textContent = showArchived
@@ -31,13 +33,11 @@ function handleFilterClick() {
   );
 }
 
-// Handler untuk tombol tambah catatan
 function toggleAddNoteForm() {
   isAddNoteFormVisible = !isAddNoteFormVisible;
   addNoteForm.style.display = isAddNoteFormVisible ? "block" : "none";
 }
 
-// Handler untuk tombol logout
 function handleLogoutClick() {
   const confirmLogout = window.confirm("Apakah kamu akan log out?");
   if (confirmLogout) {
@@ -48,20 +48,18 @@ function handleLogoutClick() {
     logoutButton.style.display = "none";
     filterButton.style.display = "none";
     notesListElement.style.display = "none";
-    addNoteForm.style.display = "none"; // Sembunyikan formulir tambah catatan
+    addNoteForm.style.display = "none";
     loginForm.style.display = "";
     loginForm.resetFields();
   }
 }
 
-// Buat navbar dan dapatkan referensi tombol
 const { filterButton, addNoteButton, logoutButton } = createNavbar(
   handleLogoutClick,
   handleFilterClick,
   toggleAddNoteForm
 );
 
-// Inisialisasi tampilan awal
 const navbar = document.querySelector(".navbar");
 
 if (isLoggedIn) {
@@ -70,7 +68,7 @@ if (isLoggedIn) {
   notesListElement.style.display = "grid";
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
-  addNoteForm.style.display = "none"; // Sembunyikan formulir tambah catatan secara default
+  addNoteForm.style.display = "none";
 
   renderNotes(
     notesData,
@@ -83,10 +81,9 @@ if (isLoggedIn) {
   loginForm.style.display = "";
   navbar.style.display = "none";
   notesListElement.style.display = "none";
-  addNoteForm.style.display = "none"; // Sembunyikan formulir tambah catatan
+  addNoteForm.style.display = "none";
 }
 
-// Event listener untuk login berhasil
 document.addEventListener("login-success", () => {
   isLoggedIn = true;
   localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
@@ -96,7 +93,7 @@ document.addEventListener("login-success", () => {
   notesListElement.style.display = "grid";
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
-  addNoteForm.style.display = "none"; // Sembunyikan formulir tambah catatan secara default
+  addNoteForm.style.display = "none";
 
   renderNotes(
     notesData,
@@ -107,9 +104,8 @@ document.addEventListener("login-success", () => {
   );
 });
 
-// Event listener untuk menambahkan catatan baru
 document.addEventListener("add-note", (event) => {
-  notesData.push(event.detail); // Tambahkan catatan baru ke data
+  notesData.push(event.detail);
   renderNotes(
     notesData,
     showArchived,

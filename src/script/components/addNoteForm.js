@@ -61,7 +61,6 @@ class AddNoteForm extends HTMLElement {
     const bodyInput = this.shadowRoot.querySelector("#body");
     const addNoteButton = this.shadowRoot.querySelector("#addNoteButton");
 
-    // Tambahkan event listener untuk validasi realtime
     titleInput.addEventListener("input", () => this.validateTitle());
     bodyInput.addEventListener("input", () => this.validateBody());
 
@@ -94,7 +93,6 @@ class AddNoteForm extends HTMLElement {
     const titleInput = this.shadowRoot.querySelector("#title");
     const bodyInput = this.shadowRoot.querySelector("#body");
 
-    // Validasi sebelum menambahkan catatan
     this.validateTitle();
     this.validateBody();
 
@@ -114,7 +112,6 @@ class AddNoteForm extends HTMLElement {
     const addNoteEvent = new CustomEvent("add-note", { detail: newNote });
     document.dispatchEvent(addNoteEvent);
 
-    // Reset input setelah menambahkan catatan
     titleInput.value = "";
     bodyInput.value = "";
     this.shadowRoot.querySelector("#titleError").style.display = "none";
