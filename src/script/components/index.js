@@ -13,6 +13,8 @@ import "./themeSwitcher.js";
 const notesListElement = document.querySelector("#notesList");
 const loginForm = document.querySelector("login-form");
 const addNoteForm = document.querySelector("add-note-form");
+const searchBar = document.querySelector("search-bar");
+const themeSwitcher = document.querySelector("theme-switcher");
 
 let showArchived = false;
 let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
@@ -49,6 +51,8 @@ function handleLogoutClick() {
     filterButton.style.display = "none";
     notesListElement.style.display = "none";
     addNoteForm.style.display = "none";
+    searchBar.style.display = "none";
+    themeSwitcher.style.display = "none";
     loginForm.style.display = "";
     loginForm.resetFields();
   }
@@ -69,6 +73,8 @@ if (isLoggedIn) {
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
   addNoteForm.style.display = "none";
+  searchBar.style.display = "block";
+  themeSwitcher.style.display = "block";
 
   renderNotes(
     notesData,
@@ -82,6 +88,8 @@ if (isLoggedIn) {
   navbar.style.display = "none";
   notesListElement.style.display = "none";
   addNoteForm.style.display = "none";
+  searchBar.style.display = "none";
+  themeSwitcher.style.display = "none";
 }
 
 document.addEventListener("login-success", () => {
@@ -94,6 +102,8 @@ document.addEventListener("login-success", () => {
   logoutButton.style.display = "block";
   filterButton.style.display = "block";
   addNoteForm.style.display = "none";
+  searchBar.style.display = "block";
+  themeSwitcher.style.display = "block";
 
   renderNotes(
     notesData,
